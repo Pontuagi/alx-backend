@@ -31,7 +31,6 @@ class FIFOCache(BaseCaching):
 
         self.cache_data[key] = item
 
-
     def get(self, key):
         """
         Return the value of a key
