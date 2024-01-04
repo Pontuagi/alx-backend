@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 """
-A simple Pagination module
+A hypermedia Pagination module
 """
 
 import csv
 import math
-from typing import Tuple, List
+from typing import Tuple, List, Optional, Dict
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
@@ -71,3 +71,29 @@ class Server:
         if start_index >= total_rows:
             return []
         return dataset[start_index:end_index + 1]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[
+                str, any]:
+        """Returns pagination information and the dataset page in a dictionary.
+
+        Args:
+        - page (int): The page number (1-indexed). Defaults to 1.
+        - page_size (int): The size of each page. Defaults to 10.
+
+        Returns:
+        - Dict[str, any]: A dictionary containing pagination information and
+        the dataset page.
+        """
+        dataset_page = self.get_page(page, page_size)
+        total_pages = math.ceil(len(self.dataset()) / page_size)
+        next_page = page + 1 if page < total_pages else None
+        prev_page = page - 1 if page > 1 else None
+
+        return {
+            "page_size": len(dataset_page),
+            "page": page,
+            "data": dataset_page,
+            "next_page": next_page,
+            "prev_page": prev_page,
+            "total_pages": total_pages
+        }
