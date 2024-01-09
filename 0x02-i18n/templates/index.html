@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Holberton</title>
+</head>
+<body>
+  <h1>Hello World</h1>
+  {% if user %}
+    <p>{{ gettext("You are logged in as %(username)s.", username=user['name']) }}</p>
+  {% else %}
+    <p>{{ gettext("You are not logged in.") }}</p>
+  {% endif %}
+
+  {% if current_time %}
+    <p>{{ gettext("The current time is %(current_time)s.", current_time=current_time) }}</p>
+  {% endif %}
+</body>
+</html>
