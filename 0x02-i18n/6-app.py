@@ -36,9 +36,16 @@ users = {
 @babel.localeselector
 def get_locale():
     """Selects the language based on the client's preferences."""
+    # Check if a user is logged in and their preferred locale is supported
+    if g.user and g.user.get('locale') in app.config['LANGUAGES']:
+        return g.user.get('locale')
+
+    # Check for locale in URL parameters
     if 'locale' in request.args and request.args[
             'locale'] in app.config['LANGUAGES']:
         return request.args['locale']
+
+    # Use request header to determine the best match for supported languages
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
@@ -78,7 +85,7 @@ def index():
         "You are logged in as %(username)s."
         ) if g.user else gettext("You are not logged in.")
     return render_template(
-        '5-index.html',
+        '6-index.html',
         welcome_message=welcome_message,
         user=g.user
         )
