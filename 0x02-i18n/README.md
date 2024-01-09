@@ -53,9 +53,9 @@ and your two dictionaries with
 	$ pybabel init -i messages.pot -d translations -l fr
 Then edit files translations/[en|fr]/LC_MESSAGES/messages.po to provide the correct value for each message ID for each language. Use the following translations:
 
-|msgid	  |English	|French |
-|home_title	|"Welcome to Holberton"	|"Bienvenue chez Holberton"|
-|home_header	|"Hello world!"	|"Bonjour monde!"|
+| msgid	  | English	| French |
+| home_title	| "Welcome to Holberton"	| "Bienvenue chez Holberton" |
+| home_header	| "Hello world!"	| "Bonjour monde!" |
 
 Then compile your dictionaries with
 
